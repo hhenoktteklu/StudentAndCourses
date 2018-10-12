@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Person {
@@ -7,7 +8,7 @@ public class Person {
     private String lastName;
     private String emailAddress;
     private long id;
-    List<Courses> courseList;
+    private ArrayList<Courses> courseList;
 
     public String getFirstName() {
         return firstName;
@@ -41,11 +42,11 @@ public class Person {
         this.id = id;
     }
 
-    public List<Courses> getCourseList() {
+    public ArrayList<Courses> getCourseList() {
         return courseList;
     }
 
-    public void setCourseList(List<Courses> courseList) {
+    public void setCourseList(ArrayList<Courses> courseList) {
         this.courseList = courseList;
     }
 

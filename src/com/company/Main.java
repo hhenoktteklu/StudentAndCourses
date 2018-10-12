@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -14,6 +15,8 @@ public class Main {
         ArrayList<Student> studentList = new ArrayList<Student>();
         ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
         ArrayList<Courses> courseList = new ArrayList<Courses>();
+        ArrayList studentCourseRegistered = new ArrayList();
+        ArrayList teacherCourseRegistered = new ArrayList();
         long studentId = 101;
         long teacherId = 10100;
         long courseId = 1010010;
@@ -22,7 +25,7 @@ public class Main {
 
 
         do {
-            System.out.print("\n 1. Add Student\n 2. Add Teacher\n 3. Add Course\n 4. List of students\n 5. List of Teacher\n 6. List of Courses\n");
+            System.out.print("\n\n 1. Add Student\n 2. Add Teacher\n 3. Add Course\n 4. List of students\n 5. List of Teacher\n 6. List of Courses\n");
 
             switch (input.nextInt()) {
                 case 1:
@@ -39,15 +42,16 @@ public class Main {
                     student.setEmailAddress(input.next());
 
                     do {
-                        ArrayList courseRegistered = new ArrayList();
+
                         System.out.println("Enter the course you want to register? ");
                         String course = input.next();
-                        courseRegistered.add(course);
-                        System.out.println("Do you want to add more? (y/n)");
+                        studentCourseRegistered.add(course);
+                        System.out.print("Do you want to add more? (y/n)");
                         if (input.next().equalsIgnoreCase("y")) {
                             studentMoreCourse = true;
                         } else {
-                            student.setCourseList(courseRegistered);
+                            student.setCourseList(studentCourseRegistered);
+                            System.out.println("--> " + studentCourseRegistered);
                             studentMoreCourse = false;
                             break;
                         }
@@ -73,12 +77,12 @@ public class Main {
                         ArrayList courseRegistered = new ArrayList();
                         System.out.print("Enter the course you teaching: ");
                         String course = input.next();
-                        courseRegistered.add(course);
-                        System.out.println("Are you teaching more course? (y/n)");
+                        teacherCourseRegistered.add(course);
+                        System.out.print("Are you teaching more course? (y/n)");
                         if (input.next().equalsIgnoreCase("y")) {
                             teacherMoreCourse = true;
                         } else {
-                            teacher.setCourseList(courseRegistered);
+                            teacher.setCourseList(teacherCourseRegistered);
                             teacherMoreCourse = false;
                             break;
                         }
@@ -104,13 +108,27 @@ public class Main {
                 case 4:
                     System.out.println("List of Students");
                     for (Student stList : studentList) {
-                        System.out.println("ID Number: " + stList.getId() + "\n" + "First Name: " + stList.getFirstName() + "\n" + "Last Name: " + stList.getLastName() + "\n" + "Email: " + stList.getEmailAddress() + "\n");
+                        System.out.println("ID Number: " + stList.getId() + "\n" + "First Name: " + stList.getFirstName() + "\n" + "Last Name: " + stList.getLastName() + "\n" + "Email: " + stList.getEmailAddress());
+
+                        ArrayList stCour = stList.getCourseList();
+
+                        System.out.print("Takes: ");
+                        for (int i = 0; i < stCour.size(); i++) {
+                            System.out.print(stCour.get(i)+" ");
+                        }
                     }
+
                     break; // optional
                 case 5:
                     System.out.println("List of Teachers");
                     for (Teacher tList : teacherList) {
                         System.out.println("ID Number: " + tList.getId() + "\n" + "First Name: " + tList.getFirstName() + "\n" + "Last Name: " + tList.getLastName() + "\n" + "Email: " + tList.getEmailAddress() + "\n");
+
+                        ArrayList stCour = tList.getCourseList();
+
+                        for (int i = 0; i < stCour.size(); i++) {
+                            System.out.print(stCour.get(i));
+                        }
                     }
                     break; // optional
 
